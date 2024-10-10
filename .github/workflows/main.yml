@@ -2,19 +2,36 @@ name: Node.js Private Package
 
 on:
   push:
-      branches:
-        - master
+    tags:
+      - "*.*.*"
 
 jobs:
-  publish-gpr:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Setup node
+        uses: actions/setup-node@v3
         with:
-          node-version: '14.x'
-          registry-url: 'https://npm.pkg.github.com/'
-      - run: npm install
-      - run: npm run build
-      - run: npm publish
+          node-version: "16.x"
+          registry-url: "https://registry.npmjs.org"
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v3
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        id: npm-cache
+        with:
+          path: node_modules
+          key: spce-pdfreader-node_modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Install Dependencies
+        if: steps.npm-cache.outputs.cache-hit != 'true'
+        run: npm install
+
+      - name: Build and publish
+        run: |
+          npm run build
+          npm publish --access=public
