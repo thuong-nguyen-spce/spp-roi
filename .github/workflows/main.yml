@@ -25,7 +25,7 @@ jobs:
         id: npm-cache
         with:
           path: node_modules
-          key: spce-pdfreader-node_modules-${{ hashFiles('**/package-lock.json') }}
+          key: spce-roi-node_modules-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install Dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'

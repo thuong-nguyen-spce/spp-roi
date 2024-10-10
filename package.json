@@ -1,13 +1,10 @@
 {
-  "name": "@thuong-nguyen-spce/spce-roi",
-  "version": "1.0.1",
+  "name": "spce-roi",
+  "version": "1.0.2",
   "description": "Made with create-react-library",
   "author": "thuong-nguyen-spce",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thuong-nguyen-spce/spce-roi.git"
-  },
+  "repository": "thuong-nguyen-spce/spp-roi.git",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
