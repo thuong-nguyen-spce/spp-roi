@@ -1,4 +1,4 @@
-name: Node.js Private Package
+name: Publish spce-roi
 
 on:
   push:
